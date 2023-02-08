@@ -1,50 +1,24 @@
 import React,{useState,useRef, useEffect} from "react";
-import Child from "./Child";
-
+import axios from 'axios'
 function App() {
-  const [number,setNumber]=useState(0)
-  const getData=(number)=>{
-    setNumber(number)
-  }
-  const [renderer,setRenderer]=useState(0)
-  const doRendering=()=>{
-    setRenderer(renderer+1)
-  }
-  const countRef=useRef(0)
-  let countVar=0
-  const ref=()=>{
-    countRef.current++
-    console.log('ref ',countRef.current)
-  }
-  const Var=()=>{
-    countVar++
-    console.log('var ',countVar)
-  }
-  const printResults=()=>{
-    console.log(`ref: ${countRef.current} ,var: ${countVar}` )
-  }
-  const [count,setCount]=useState(1)
-  // const [renderCount,setRenderCount]=useState(1)
-  const renderCount=useRef(1)
-  useEffect(()=>{
-    renderCount.current++
-    console.log('렌더링 수 ',renderCount.current)
-  })
+    const [movie,setMovie]=useState(null)
+    useEffect(()=>{
+      axios.get("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=093fa54b95c0b9d5d8bc4dfdfa089cd3&targetDt=20230108")
+        .then((result)=>{
+          setMovie(result.data.boxOfficeResult.dailyBoxOfficeList
+            )
+        })
+        .catch(()=>{
+          console.log('fail')
+        })
+        
+    },[]) 
+    
     return (
-    <div className="App">
-      <p>여기는 부모입니다.</p>
-      <Child number={number} getData={getData}></Child>
-      <p>{number}</p>
-      <p>Ref:{countRef.current}</p>
-      <p>Var:{countVar}</p>
-      <button onClick={ref}>ref올려</button>
-      <button onClick={Var}>var올려</button>
-      <button onClick={doRendering}>aa</button>
-      <button onClick={printResults}>a123</button>
-
-
-      <p>Count:{count}</p>
-      <button onClick={()=>setCount(count+1)}>올려</button>
+    <div>
+      {movie===null?'loading':movie.map((v,i)=>(
+        <div key={i}>{v.movieNm}</div>
+      ))}
     </div>
   );
 }
