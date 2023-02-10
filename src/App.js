@@ -1,5 +1,8 @@
 import React,{useState,useRef, useEffect} from "react";
 import axios from 'axios'
+import { Sidebar, SidebarItem } from 'react-responsive-sidebar';
+import ResponsiveDrawer from "./Child";
+import Main from './Main'
 function App() {
     const [movie,setMovie]=useState(null)
     useEffect(()=>{
@@ -13,13 +16,16 @@ function App() {
         })
         
     },[]) 
-    
+    const items = [
+  <SidebarItem>Dashboard</SidebarItem>,
+  <SidebarItem>Profile</SidebarItem>,
+  <SidebarItem>Settings</SidebarItem>,
+];
     return (
-    <div>
-      {movie===null?'loading':movie.map((v,i)=>(
-        <div key={i}>{v.movieNm}</div>
-      ))}
-    </div>
+    <>
+    <ResponsiveDrawer/>
+    <Main style={{marginLeft:'1000px'}}></Main>
+    </>
   );
 }
 
