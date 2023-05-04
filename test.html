@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="test.css">
+</head>
+<body>
+  <div id="div-content">
+  <span id="span-content">
+    <button id="btn">버튼</button>
+  </span>
+</div>
+<script>
+  const divNode = document.getElementById("div-content");
+
+// div 노드에만 이벤트 리스너를 설정
+  divNode.addEventListener("click", function (e) {
+  const id = e.target.id;
+  
+  // 이벤트 객체의 target.id로 조건문을 설정
+  console.log(123123123)
+  // if (id === "div-content") {
+  //   console.log("div-content id Click");
+  // } else if (id === "span-content") {
+  //   console.log("span-content id Click");
+  // } else if (id === "btn") {
+  //   console.log("btn id Click");
+  // }
+});
+</script>
+</body>
+</html>

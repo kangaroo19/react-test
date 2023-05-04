@@ -1,0 +1,14 @@
+#div-content{
+    width:200px;
+    height:200px;
+    border:1px solid black;
+    margin: 0 auto;
+}
+
+#span-content{
+    width:100px;
+    height:100px;
+    border:1px solid black;
+    margin: 0 auto;
+    display: block;
+}
