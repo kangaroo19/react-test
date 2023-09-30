@@ -1,57 +1,53 @@
-import Child from "./Child";
-import Parent from "./Parent";
-import PhotoOne from "./PhotoOne";
-import PhotoTwo from "./PhotoTwo";
-import { useState,useEffect, useMemo } from "react";
+import {useState, useMemo } from "react";
 
-const hardCalculate=(number)=>{
-  console.log('어려운 계산')
-  for(let i=0;i<999999999;i++){}
-  return number+10000;
-}
+const hardCalculate = (number) => {
+  console.log("어려운 계산");
+  for (let i = 0; i < 99999999; i++) {}
+  return number + 10000;
+};
 
-const easyCalculate=(number)=>{
-  console.log('쉬운 계산')
-  return number+1;
-}
-function App() {
-  const [number,setNumber]=useState(0)
-  const [isKorea,setIsKorea]=useState(true)
+const easyCalculate = (number) => {
+  console.log("쉬운 계산");
+  return number + 1;
+};
 
-  const location=useMemo(()=>{
-    return {
-      country:isKorea ? '한국' : '외국'
-    }
-  },[isKorea]) 
+export default function App() {
+  const [hardNumber, setHardNumber] = useState(1);
+  const [easyNumber, setEasyNumber] = useState(1);
 
-  // const location={
-  //   country:isKorea ? '한국' : '외국'
-  // }
-
-  useEffect(()=>{
-    console.log('useEffect 호출')
-  },[location]) 
-  // setNumber로 인해 number값이 바뀔때 useEffect의 deps는 locatoin이므로 
-  // useEffect 안의 콘솔출력은 안될거 같지만
-  // setNumber로 인해 리랜더링 되면서 객체로 선언된 location값을 참조하는 메모리 주소 바뀜
-  // 그러므로 useEffect 안의 콘솔출력됨
-  // 이를 막기위해 useMemo 사용
-  // useMemo 사용시 useMemo안의 deps값 바뀌지만 않는다면
-  // 이전에 연산한 값 그대로 사용(memoization)
+  // const hardSum=hardCalculate(hardNumber) 
+  // const easySum=easyCalculate(easyNumber)
+  // input태그의 값을 입력하여 
+  // hardNumber 또는 easyNumber의 값이 바뀐다면
+  // state값이 바뀌므로 App컴포넌트가 리랜더링됨
+  // 그러므로 18,19행의 두 함수도 다시 호출됨 => 이는 콘솔출력으로 확인가능
+  // hardCalculate함수의 for문은 99999999번 실행되므로 input필드 입력시 상당히 느려짐
+  // 여기서 easyNumber의 값이 바뀌는 쉬운 계산의 input 필드값을 입력으로 바뀌게 한다면
+  // hardCalcuate도 같이 호출되어 입력이 상당히 느림
+  // easyNumber가 바뀔때는 hardCalculate함수가 호출될 필요 없으므로
+  // 메모이제이션위한 useMemo사용 
+  const hardSum = useMemo(() => {
+    hardCalculate(hardNumber);
+  }, [hardNumber]);
+  const easySum = useMemo(() => {
+    easyCalculate(easyNumber);
+  }, [easyNumber]);
   return (
     <div>
-      <h2>하루에 몇끼 먹어요?</h2>
-      <input type="number" value={number} onChange={(e)=>setNumber(e.target.value)}/>
-      <hr />
-      <h2>어느 나라에 있어요?</h2>
-      <p>나라 : {location.country}</p>
-      <button onClick={()=>setIsKorea(!isKorea)}>비행기 타자</button>
-      <hr />
-      <Child/>
-      <hr />
-      <Parent/>
+      <h3>어려운 계산기</h3>
+      <input
+        type="number"
+        value={hardNumber}
+        onChange={(e) => setHardNumber(Number(e.target.value))}
+      />
+      <span>+ 10000 = {hardSum}</span>
+      <h3>쉬운 계산기</h3>
+      <input
+        type="number"
+        value={easyNumber}
+        onChange={(e) => setEasyNumber(Number(e.target.value))}
+      />
+      <span>+ 1= {easySum}</span>
     </div>
-  )
+  );
 }
-
-export default App;
