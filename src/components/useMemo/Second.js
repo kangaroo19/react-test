@@ -11,7 +11,7 @@ const easyCalculate = (number) => {
   return number + 1;
 };
 
-export default function Second() {
+export default function App() {
   const [hardNumber, setHardNumber] = useState(1);
   const [easyNumber, setEasyNumber] = useState(1);
 
