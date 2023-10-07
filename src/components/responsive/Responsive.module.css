@@ -1,0 +1,128 @@
+.boxContainer {
+  width: 710px;
+  height: 441px;
+  border: 3px solid black;
+  font-weight: 700;
+  font-style: normal;
+  font-family: Inter;
+}
+
+.titleContainer {
+  width: 100%;
+  height: 23.8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleContainer div {
+  /* font-size: 41px; */
+  font-size: 2.135vw;
+}
+
+.sectionContainer {
+  width: 100%;
+  height: 33.7%;
+  /* 149px */
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.PWContainer {
+  width: 92%;
+  /* 650px */
+  height: 53%;
+  /* 79px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.PWInner {
+  width: 100%;
+  /* 650px */
+  height: 40%;
+  /* 32px */
+  display: flex;
+  justify-content: space-between;
+}
+
+.PWInner div {
+  width: 25.8%;
+  /* font-size: 25px; */
+  font-size: 1.302vw;
+  border: 1px solid red;
+  font-family: Inter;
+}
+
+.PWInner input {
+  width: 46.6%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid black;
+  /* 30px */
+  box-sizing: border-box;
+  /* 인풋필드는 border-box 줘야되는듯? */
+}
+
+.PWInner button {
+  width: 18.7%;
+  height: 100%;
+  font-size: 19px;
+  font-size: 0.990vw;
+}
+
+.text {
+  width: 63.6%;
+  padding-left: 30.2%;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+}
+
+.text div {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  /* font-size: 17px; */
+  font-size: 0.885vw;
+}
+
+@media (max-width: 1024px) {
+  .boxContainer {
+    width: 358px;
+    height: 229px;
+  }
+  .text{
+    zoom: 0.8;
+  }
+
+}
+
+@media (max-width: 768px) {
+    .boxContainer {
+      width: 358px;
+      height: 149px;
+    }
+    .text{
+      zoom: 0.8;
+    }
+  
+  }
+  
+  @media (max-width: 320px) {
+    .boxContainer {
+      width: 241px;
+      height: 170px;
+      
+    }
+    .text{
+      zoom: 0.6;
+    }
+  
+  }
+  
